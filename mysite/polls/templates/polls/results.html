@@ -1,3 +1,8 @@
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +10,21 @@
     <title>Results</title>
 </head>
 <body>
-    <h1>{{ question.question_text }}</h1>
+    <div class="container-fluid">
+        <div class="listbox">
 
-    <ul>
-    {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-    </ul>
+            <h1>{{ question.question_text }}</h1>
 
-    <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+            <ul class="list-group">
+            {% for choice in question.choice_set.all %}
+                <li class="list-group-item list-group-item-action">{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }} </li>
+            {% endfor %}
+                
+            </ul>
+
+            <a href="{% url 'polls:detail' question.id %}">Vote again?</a> </br>
+            <a href="{% url 'polls:index' %}">Or return to polls choice?</a>
+        </div>
+    </div>        
 </body>
 </html>
